@@ -17,6 +17,15 @@ public class Students extends Persons {
     }
 
     public void afficher() {
-        System.out.println(getName() + " " + getAge() + " " + getStudentId());
+
+        System.out.println(this.toString());
+//        System.out.println(getName() + " " + getAge() + " " + getStudentId());
+    }
+
+    @Override
+    public String toString() {
+        return  super.toString()+" "+"Students{" +
+                "studentId=" + studentId +
+                '}';
     }
 }

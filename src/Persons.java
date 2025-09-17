@@ -1,5 +1,8 @@
 abstract class Persons{
   private   int age ;
+
+
+
     private String name;
 
     public Persons(int newage, String newname){
@@ -21,6 +24,14 @@ this.name=name;
 
     public void setAge(int age){
         this.age=age;
+    }
+
+    @Override
+    public String toString() {
+        return "Persons{" +
+                "age=" + age +
+                ", name='" + name + '\'' +
+                '}';
     }
 
     public abstract void getRole() ;
