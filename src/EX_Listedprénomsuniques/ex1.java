@@ -1,7 +1,11 @@
 package EX_Listedprénomsuniques;
 
+import exe.Array;
+
 import java.util.*;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ex1 {
 
@@ -162,7 +166,7 @@ public class ex1 {
         nambers.add(1);
 
 
-        java.util.Optional<Integer> maxvall = nambers.stream().max(Integer::compare);
+        Optional<Integer> maxvall = nambers.stream().max(Integer::compare);
 
         System.out.println(maxvall.get());
 
@@ -228,14 +232,12 @@ public class ex1 {
 //        Find the product with the highest quantity.
         stock.entrySet().stream().filter(n -> n.getValue() == 0).forEach(System.out::println);
 //        Remove products with invalid quantities.
-        stock.entrySet().removeIf(n->n.getValue()<0);
+        stock.entrySet().removeIf(n -> n.getValue() < 0);
         System.out.println(stock);
 //        Find the product with the highest quantity.
 //        Optional<Integer>val =stock.values().stream().reduce(Integer::max);
-        Optional<Map.Entry<String,Integer>>val =stock.entrySet().stream().max(Map.Entry.comparingByValue());
+        Optional<Map.Entry<String, Integer>> val = stock.entrySet().stream().max(Map.Entry.comparingByValue());
         System.out.println(val);
-
-
 
 
 //        Exercise 8 – Temperatures
@@ -244,38 +246,59 @@ public class ex1 {
 //        Filter or select temperatures based on conditions of your choice.
         System.out.println("-----------------Filter or select temperatures based on conditions of your choice.------------");
 
-        temps.stream().filter(n->n>20).forEach(System.out::println);
+        temps.stream().filter(n -> n > 20).forEach(System.out::println);
         System.out.println("-----------------Perform calculations or find specific values from the list.------------");
 
-        temps.stream().filter(n->n==40).map(n->n*2).forEach(System.out::println);
+        temps.stream().filter(n -> n == 40).map(n -> n * 2).forEach(System.out::println);
 
 
 //        Exercise 9 – Student Scores
 
-        HashMap<String,ArrayList<Integer>> students=new HashMap<>();
+        HashMap<String, ArrayList<Integer>> students = new HashMap<>();
 
-        students.put("amine",new ArrayList<>(List.of(10,2,17,1)));
+        students.put("amine", new ArrayList<>(List.of(10, 2, 17, 1)));
         students.put("Said", new ArrayList<>(List.of(8, 9, 7, 10)));
         students.put("Samira", new ArrayList<>(List.of(15, 18, 17, 16)));
 
         System.out.println("-----------------Calculate the average score of each student..------------");
 
-        HashMap<String,Double> avhNotes=new HashMap<>();
+        HashMap<String, Double> avhNotes = new HashMap<>();
 
-         for (Map.Entry<String, ArrayList<Integer>> s : students.entrySet()){
-            Optional<Integer>sommess =s.getValue().stream().reduce((a, b)->a+b);
-             System.out.println(sommess);
-             System.out.println(sommess.get()/s.getValue().size());
+        for (Map.Entry<String, ArrayList<Integer>> s : students.entrySet()) {
+            Optional<Integer> sommess = s.getValue().stream().reduce((a, b) -> a + b);
+            System.out.println(sommess);
+            System.out.println(sommess.get() / s.getValue().size());
 
-             avhNotes.put(s.getKey(), (double) (sommess.get()/s.getValue().size()));
+            avhNotes.put(s.getKey(), (double) (sommess.get() / s.getValue().size()));
 
         }
 
         System.out.println(avhNotes);
 
-        Optional<Double>maxx=avhNotes.values().stream().reduce(Double::max);
+        Optional<Double> maxx = avhNotes.values().stream().reduce(Double::max);
 
         System.out.println(maxx.get());
+
+
+//        recap
+
+      Map<String,Integer> produitssc=new HashMap<>();
+
+        produitssc.put("tide",2);
+        produitssc.put("sabon",20);
+        produitssc.put("sabon1",-2);
+        produitssc.put("zara",29);
+        produitssc.put("somo",0);
+        produitssc.put("fromage",30);
+
+
+
+        Map<String,Integer>newHash=produitssc.entrySet().stream().filter(n->n.getValue()>10).collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue));
+
+
+
+        System.out.println("----------------------");
+        System.out.println(newHash);
 
     }
 
